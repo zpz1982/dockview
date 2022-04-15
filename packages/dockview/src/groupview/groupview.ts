@@ -137,6 +137,10 @@ export class Groupview extends CompositeDisposable implements IGroupview {
         throw new Error('not supported');
     }
 
+    get params(): Record<string, any> | undefined {
+        return {}; // required by interface
+    }
+
     get activePanel(): IGroupPanel | undefined {
         return this._activePanel;
     }

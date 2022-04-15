@@ -13,13 +13,18 @@ import { IGroupPanelView } from '../../../dockview/defaultGroupPanelView';
 
 class TestContentRenderer
     extends CompositeDisposable
-    implements IContentRenderer {
+    implements IContentRenderer
+{
     readonly element: HTMLElement;
 
     readonly _onDidFocus = new Emitter<void>();
     readonly _onDidBlur = new Emitter<void>();
     readonly onDidFocus: Event<void> = this._onDidFocus.event;
     readonly onDidBlur: Event<void> = this._onDidBlur.event;
+
+    get params(): Record<string, any> {
+        return {};
+    }
 
     constructor(public id: string) {
         super();

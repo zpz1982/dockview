@@ -29,6 +29,10 @@ class Watermark implements IWatermarkRenderer {
         return 'watermark-id';
     }
 
+    get params(): Record<string, any> {
+        return {};
+    }
+
     init(params: GroupPanelPartInitParameters) {
         //
     }
@@ -60,6 +64,10 @@ class Watermark implements IWatermarkRenderer {
 
 class TestContentPart implements IContentRenderer {
     public element = document.createElement('div');
+
+    get params(): Record<string, any> {
+        return {};
+    }
 
     constructor(public readonly id: string) {
         this.element.className = `content-part-${id}`;
@@ -95,6 +103,10 @@ class TestContentPart implements IContentRenderer {
 }
 class TestHeaderPart implements ITabRenderer {
     public element = document.createElement('div');
+
+    get params(): Record<string, any> {
+        return {};
+    }
 
     constructor(public readonly id: string) {
         this.element.className = `header-part-${id}`;
@@ -133,6 +145,10 @@ class TestPanel implements IGroupPanel {
     private _view: IGroupPanelView | undefined;
     private _group: GroupviewPanel | undefined;
     private _params: IGroupPanelInitParameters;
+
+    get params(): Record<string, any> {
+        return {};
+    }
 
     get title() {
         return '';

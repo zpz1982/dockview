@@ -18,6 +18,7 @@ export interface PanelUpdateEvent<T extends Parameters = Parameters> {
 
 export interface IPanel extends IDisposable {
     readonly id: string;
+    readonly params: Record<string, any> | undefined;
     init(params: PanelInitParameters): void;
     layout(width: number, height: number): void;
     update(event: PanelUpdateEvent<Parameters>): void;

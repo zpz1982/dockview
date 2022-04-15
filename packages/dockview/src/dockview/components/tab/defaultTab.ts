@@ -15,6 +15,10 @@ export class WrappedTab implements ITabRenderer {
         this.show();
     }
 
+    get params(): Record<string, any> | undefined {
+        return {};
+    }
+
     get innerRenderer() {
         return this.renderer;
     }
@@ -78,10 +82,14 @@ export class DefaultTab extends CompositeDisposable implements ITabRenderer {
     private _list: HTMLElement;
     private action: HTMLElement;
     //
-    private params: GroupPanelPartInitParameters = {} as any;
+    private _params: GroupPanelPartInitParameters = {} as any;
 
     get element() {
         return this._element;
+    }
+
+    get params(): Record<string, any> | undefined {
+        return this._params.params;
     }
 
     get id() {
@@ -121,7 +129,7 @@ export class DefaultTab extends CompositeDisposable implements ITabRenderer {
     }
 
     public update(event: PanelUpdateEvent) {
-        this.params = { ...this.params, ...event.params };
+        this._params = { ...this._params, ...event.params };
         this.render();
     }
 
@@ -134,13 +142,13 @@ export class DefaultTab extends CompositeDisposable implements ITabRenderer {
     }
 
     public init(params: GroupPanelPartInitParameters) {
-        this.params = params;
+        this._params = params;
         this._content.textContent = params.title;
 
-        if (!this.params.suppressClosable) {
+        if (!this._params.suppressClosable) {
             addDisposableListener(this.action, 'click', (ev) => {
                 ev.preventDefault(); //
-                this.params.api.close();
+                this._params.api.close();
             });
         } else {
             this.action.classList.add('disable-close');
@@ -159,6 +167,6 @@ export class DefaultTab extends CompositeDisposable implements ITabRenderer {
     }
 
     private render() {
-        this._content.textContent = this.params.title;
+        this._content.textContent = this._params.title;
     }
 }

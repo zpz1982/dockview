@@ -24,6 +24,10 @@ export class ReactWatermarkPart implements IWatermarkRenderer {
         return this._element;
     }
 
+    get params(): Record<string, any> | undefined {
+        return this.parameters?.params;
+    }
+
     constructor(
         public readonly id: string,
         private readonly component: React.FunctionComponent<IWatermarkPanelProps>,

@@ -11,13 +11,18 @@ import { PanelUpdateEvent } from '../../../panel/types';
 
 export class Watermark
     extends CompositeDisposable
-    implements IWatermarkRenderer {
+    implements IWatermarkRenderer
+{
     private _element: HTMLElement;
     private group: GroupviewPanel | undefined;
-    private params: GroupPanelPartInitParameters | undefined;
+    private _params: GroupPanelPartInitParameters | undefined;
 
     get id() {
         return 'watermark';
+    }
+
+    get params(): Record<string, any> | undefined {
+        return this._params?.params;
     }
 
     constructor() {
@@ -50,7 +55,7 @@ export class Watermark
             addDisposableListener(closeAnchor, 'click', (ev) => {
                 ev.preventDefault();
                 if (this.group) {
-                    this.params?.containerApi.removeGroup(this.group);
+                    this._params?.containerApi.removeGroup(this.group);
                 }
             })
         );
@@ -73,10 +78,10 @@ export class Watermark
     }
 
     init(params: GroupPanelPartInitParameters) {
-        this.params = params;
+        this._params = params;
 
         this.addDisposables(
-            this.params.containerApi.onDidLayoutChange((event) => {
+            this._params.containerApi.onDidLayoutChange((event) => {
                 this.render();
             })
         );
@@ -95,7 +100,7 @@ export class Watermark
 
     private render() {
         const isOneGroup = !!(
-            this.params && this.params.containerApi.size <= 1
+            this._params && this._params.containerApi.size <= 1
         );
         toggleClass(this.element, 'has-actions', isOneGroup);
     }

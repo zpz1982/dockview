@@ -16,6 +16,10 @@ export class WebviewContentRenderer implements IContentRenderer {
         return this._element;
     }
 
+    get params(): Record<string, any> | undefined {
+        return this.parameters?.params;
+    }
+
     constructor(public readonly id: string) {
         this._hostedContainer = new HostedContainer({ id });
 

@@ -12,8 +12,14 @@ export class ReactPanelHeaderPart implements ITabRenderer {
     private _element: HTMLElement;
     private part?: ReactPart<IGroupPanelBaseProps>;
 
+    private _parameters: GroupPanelPartInitParameters | undefined;
+
     get element() {
         return this._element;
+    }
+
+    get params(): Record<string, any> | undefined {
+        return {};
     }
 
     constructor(
@@ -30,6 +36,8 @@ export class ReactPanelHeaderPart implements ITabRenderer {
     }
 
     public init(parameters: GroupPanelPartInitParameters): void {
+        this._parameters = parameters;
+
         this.part = new ReactPart(
             this.element,
             this.reactPortalStore,

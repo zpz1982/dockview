@@ -21,6 +21,10 @@ export class ReactContentRenderer implements IContentRenderer {
         return this._element;
     }
 
+    get params(): Record<string, any> | undefined {
+        return this.parameters?.params;
+    }
+
     get onDidBlur() {
         return this._hostedContainer.onDidBlur;
     }

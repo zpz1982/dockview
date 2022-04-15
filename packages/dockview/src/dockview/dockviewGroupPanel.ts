@@ -43,6 +43,10 @@ export class DockviewGroupPanel
         return this._view;
     }
 
+    get params(): Record<string, any> | undefined {
+        return this._params?.params;
+    }
+
     constructor(
         public readonly id: string,
         accessor: DockviewComponent,

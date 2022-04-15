@@ -15,6 +15,10 @@ import {
 class PanelContentPartTest implements IContentRenderer {
     element: HTMLElement = document.createElement('div');
 
+    get params(): Record<string, any> {
+        return {};
+    }
+
     constructor(public readonly id: string, component: string) {
         this.element.classList.add(`testpanel-${id}`);
     }
